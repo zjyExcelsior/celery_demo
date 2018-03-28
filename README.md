@@ -1,4 +1,4 @@
-# celery_3_x_demo
+# celery_demo
 
 启动 celery worker:
 
