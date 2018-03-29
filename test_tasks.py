@@ -7,4 +7,9 @@ if __name__ == '__main__':
     async_result = tasks.list_users.apply_async()
     while not async_result.ready():
         pass
-    print async_result.ready(), async_result.result
+    assert True == async_result.ready()
+    print async_result.result
+
+    async_result = tasks.ignore_result_task.apply_async()
+    assert False == async_result.ready()
+    assert None == async_result.result
