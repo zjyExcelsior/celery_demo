@@ -3,7 +3,7 @@ from celery import Celery
 
 app = Celery('celery_demo',
              broker='amqp://testonly:testonly@localhost:5672/celery_demo',
-             backend='rpc://testonly:testonly@localhost:5672/celery_demo',
+             backend='redis://localhost:6379/1',
              include=['celery_demo.tasks'])
 
 app.conf.update(

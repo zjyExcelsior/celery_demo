@@ -1,5 +1,9 @@
 # celery_demo
 
+启动 redis:
+
+    $ docker run -d -p 6379:6379 --name redis redis:latest
+
 启动 rabbitmq-server:
 
     $ docker run -d -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:latest
