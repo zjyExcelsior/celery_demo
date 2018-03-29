@@ -8,7 +8,7 @@ app = Celery('celery_demo',
 
 app.conf.update(
     result_expires=3600,
-    task_serializer='pickle',
+    task_serializer='msgpack',
     result_serializer='pickle',
-    accept_content=['pickle']
+    accept_content=['msgpack', 'pickle']
 )
