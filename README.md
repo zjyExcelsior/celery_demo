@@ -22,7 +22,7 @@
 
 启动 celery worker:
 
-    $ celery worker --app=celery_demo.celery_app --concurrency=4 --events --loglevel=info
+    $ celery worker --app=celery_demo --concurrency=4 --events --loglevel=info
 
 启动 flower:
 
