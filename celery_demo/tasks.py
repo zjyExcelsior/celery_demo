@@ -22,6 +22,10 @@ def list_users():
 def ignore_result_task():
     return 'ignore_result_task'
 
+@app.task
+def raise_exception_task():
+    1/0
+
 
 @app.task
 def add(x, y):
