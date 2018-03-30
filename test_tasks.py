@@ -21,3 +21,10 @@ if __name__ == '__main__':
                                               async_result.failed(),
                                               async_result.successful(),
                                               async_result.state)
+
+    async_result = tasks.bounded_task.apply_async(('arg1', 'arg2'),
+                                                  kwargs={'kw1': 'val1'})
+    task_id = async_result.id
+    while not async_result.ready():
+        pass
+    assert task_id == async_result.result

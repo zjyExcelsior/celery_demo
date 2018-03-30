@@ -22,9 +22,17 @@ def list_users():
 def ignore_result_task():
     return 'ignore_result_task'
 
+
 @app.task
 def raise_exception_task():
-    1/0
+    1 / 0
+
+
+@app.task(bind=True)
+def bounded_task(self, arg1, arg2, **kwargs):
+    msg_fmt = 'Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'
+    print(msg_fmt.format(self.request))
+    return self.request.id
 
 
 @app.task
