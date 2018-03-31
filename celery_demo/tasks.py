@@ -1,8 +1,11 @@
 # coding=utf-8
 import celery
+from celery.utils.log import get_task_logger
 
 from celery_demo.celery_app import app
 from celery_demo.model import Session, User
+
+logger = get_task_logger(__name__)
 
 
 class SQLAlchemyTask(celery.Task):
@@ -33,6 +36,11 @@ def bounded_task(self, arg1, arg2, **kwargs):
     msg_fmt = 'Executing task id {0.id}, args: {0.args!r} kwargs: {0.kwargs!r}'
     print(msg_fmt.format(self.request))
     return self.request.id
+
+
+@app.task
+def logger_task():
+    logger.info('logger_task executing...')
 
 
 @app.task

@@ -4,6 +4,7 @@ from celery_demo import tasks
 if __name__ == '__main__':
     async_result = tasks.add.apply_async((3, 4))
     from celery.backends.redis import RedisBackend
+
     assert RedisBackend == type(async_result.backend)
 
     async_result = tasks.list_users.apply_async()
@@ -31,3 +32,5 @@ if __name__ == '__main__':
     while not async_result.ready():
         pass
     assert task_id == async_result.result
+
+    tasks.logger_task.apply_async()
