@@ -2,13 +2,15 @@
 from celery_demo import tasks
 
 if __name__ == '__main__':
-    tasks.add.apply_async((3, 4))
+    async_result = tasks.add.apply_async((3, 4))
+    from celery.backends.redis import RedisBackend
+    assert RedisBackend == type(async_result.backend)
 
     async_result = tasks.list_users.apply_async()
     while not async_result.ready():
         pass
     assert True == async_result.ready()
-    print async_result.result
+    print(async_result.result)
 
     async_result = tasks.ignore_result_task.apply_async()
     assert False == async_result.ready()
@@ -21,6 +23,7 @@ if __name__ == '__main__':
                                               async_result.failed(),
                                               async_result.successful(),
                                               async_result.state)
+    print(async_result.traceback)
 
     async_result = tasks.bounded_task.apply_async(('arg1', 'arg2'),
                                                   kwargs={'kw1': 'val1'})

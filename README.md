@@ -20,7 +20,7 @@
 
     # docker exec rabbitmq rabbitmqctl set_permissions -p celery_demo testonly ".*" ".*" ".*"
 
-启动 celery worker:
+启动 celery worker(消费者):
 
     $ celery worker --app=celery_demo --concurrency=4 --events --loglevel=info
 
