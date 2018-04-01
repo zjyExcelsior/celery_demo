@@ -12,6 +12,8 @@ class SQLAlchemyTask(celery.Task):
     def after_return(self, status, retval, task_id, args, kwargs, einfo):
         print('after_return....')
         Session.remove()
+        super(SQLAlchemyTask, self).after_return(status, retval, task_id, args,
+                                                 kwargs, einfo)
 
 
 @app.task(base=SQLAlchemyTask)
@@ -41,6 +43,16 @@ def bounded_task(self, arg1, arg2, **kwargs):
 @app.task
 def logger_task():
     logger.info('logger_task executing...')
+
+
+@app.task(queue='web_tasks')
+def task_route_by_queue():
+    return 'route_by_queue...'
+
+
+@app.task(routing_key='web.task_by_routing_key')
+def task_route_by_routing_key():
+    return 'route_by_routing_key...'
 
 
 @app.task

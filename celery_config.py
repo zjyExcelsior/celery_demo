@@ -10,7 +10,7 @@ result_serializer = 'pickle'
 accept_content = ['msgpack', 'pickle']
 
 default_exchange = Exchange('default', type='topic')
-task_queues = (  # 定义任务队列
+task_queues = (  # 定义任务队列(routing_key表示binding key)
     Queue('default', default_exchange, routing_key='task.#'),
     Queue('web_tasks', default_exchange, routing_key='web.#')
 )
