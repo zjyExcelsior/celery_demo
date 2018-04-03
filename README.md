@@ -24,6 +24,10 @@
 
     $ celery multi start celery_demo1 celery_demo2 --app=celery_demo --concurrency=4 --events --loglevel=info --pidfile=/tmp/%n.pid --logfile=/tmp/%n%I.log --autoscale=4,2
 
+重启 celery worker(消费者):
+
+    celery multi restart celery_demo1 celery_demo2 --pidfile=/tmp/%n.pid
+
 停止 celery worker(消费者):
 
     $ celery multi stop celery_demo1 celery_demo2 --pidfile=/tmp/%n.pid
