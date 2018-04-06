@@ -1,6 +1,7 @@
 # coding=utf-8
 import celery
 from celery import shared_task
+from celery.backends.rpc import RPCBackend
 from celery.utils.log import get_task_logger
 
 from celery_demo.celery_app import app
@@ -17,7 +18,7 @@ class SQLAlchemyTask(celery.Task):
                                                  kwargs, einfo)
 
 
-@app.task(base=SQLAlchemyTask)
+@app.task(base=SQLAlchemyTask, backend=RPCBackend(app, serializer='pickle'))
 def list_users():
     users = Session.query(User).limit(10).all()
     print('session id: {}'.format(id(Session())))  # 输出session id

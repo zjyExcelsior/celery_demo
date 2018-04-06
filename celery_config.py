@@ -6,8 +6,8 @@ result_backend = 'redis://localhost:6379/1'
 include = ['celery_demo.tasks']
 result_expires = 3600 * 24
 task_serializer = 'msgpack'
-result_serializer = 'pickle'
-accept_content = ['msgpack', 'pickle']
+result_serializer = 'json'
+accept_content = ['msgpack', 'json', 'pickle']
 
 default_exchange = Exchange('default', type='topic')
 task_queues = (  # 定义任务队列(routing_key表示binding key)
