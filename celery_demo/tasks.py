@@ -1,5 +1,6 @@
 # coding=utf-8
 import celery
+from celery import shared_task
 from celery.utils.log import get_task_logger
 
 from celery_demo.celery_app import app
@@ -53,6 +54,10 @@ def task_route_by_queue():
 @app.task(routing_key='web.task_by_routing_key')
 def task_route_by_routing_key():
     return 'route_by_routing_key...'
+
+@shared_task
+def a_shared_task():
+    return 'a shared task'
 
 
 @app.task
