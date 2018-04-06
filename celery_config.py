@@ -2,6 +2,11 @@
 from kombu import Exchange, Queue
 
 broker_url = 'amqp://testonly:testonly@localhost:5672/celery_demo'
+# redis_host, redis_port, redis_db, redis_password 用于 RedisBackend
+redis_host = 'localhost'
+redis_port = 6379
+redis_db = 1
+# redis_password =
 result_backend = 'redis://localhost:6379/1'
 include = ['celery_demo.tasks']
 result_expires = 3600 * 24

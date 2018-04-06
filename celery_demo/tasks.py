@@ -18,10 +18,7 @@ class SQLAlchemyTask(celery.Task):
                                                  kwargs, einfo)
 
 
-@app.task(base=SQLAlchemyTask, backend=RedisBackend(host='localhost',
-                                                    port='6379',
-                                                    db='1',
-                                                    app=app,
+@app.task(base=SQLAlchemyTask, backend=RedisBackend(app=app,
                                                     serializer='pickle'))
 def list_users():
     users = Session.query(User).limit(10).all()
